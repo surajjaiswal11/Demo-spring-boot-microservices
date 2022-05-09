@@ -8,6 +8,7 @@ import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +71,19 @@ public class DepartmentController {
     public DepartmentModel findDepartmentById(@PathVariable("id") int id) {
         log.info("------------ Get Department [web service] --------------");
         return departmentService.findDepartmentById(id);
+
+    }
+    
+    /**
+     * Find department by id.
+     * 
+     * @author Mindbowser | suraj.jaiswal@mindbowser.com
+     */
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation(value = "delete department by unique department id.", notes = "This API used to delete department.")
+    public DepartmentModel deleteSoftDepartmentById(@PathVariable("id") int id) {
+        log.info("------------ delete Department [web service] --------------");
+        return departmentService.deleteSoftDepartmentById(id);
 
     }
 

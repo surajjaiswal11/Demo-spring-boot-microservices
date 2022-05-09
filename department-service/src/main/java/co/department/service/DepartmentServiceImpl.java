@@ -16,31 +16,42 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    @Autowired(required = true)
-    public DepartmentRepo departmentRepo;
+	@Autowired(required = true)
+	public DepartmentRepo departmentRepo;
 
-    @Autowired
-    private Mapper mapper;
+	@Autowired
+	private Mapper mapper;
 
-    @Override
-    public Object saveDepartment(DepartmentModel departmentModel) {
-        // need to mapper
-        Department department = mapper.map(departmentModel, Department.class);
-        return departmentRepo.save(department);
+	@Override
+	public Object saveDepartment(DepartmentModel departmentModel) {
+		// need to mapper
+		Department department = mapper.map(departmentModel, Department.class);
+		return departmentRepo.save(department);
 
-    }
+	}
 
-    @Override
-    public DepartmentModel findDepartmentById(int id) {
-        log.info("department id : " +id);
-        Optional<Department> dep = departmentRepo.findById(id);
-       
-        if (dep.isPresent()) {
-            log.info("department : " + dep.get());
-            return mapper.map(dep.get(), DepartmentModel.class);
+	@Override
+	public DepartmentModel findDepartmentById(int id) {
+		log.info("department id : " + id);
+		Optional<Department> dep = departmentRepo.findByIdAndIsDeleted(id, false);
 
-        }
-        return null;
-    }
+		if (dep.isPresent()) {
+			log.info("department : " + dep.get());
+			return mapper.map(dep.get(), DepartmentModel.class);
+
+		}
+		return null;
+	}
+
+	@Override
+	public DepartmentModel deleteSoftDepartmentById(int id) {
+		Optional<Department> dep = departmentRepo.findById(id);
+
+		if (dep.isPresent() && !dep.get().isDeleted()) {
+			dep.get().setDeleted(true);
+			departmentRepo.save(dep.get());
+		}
+		return null;
+	}
 
 }

@@ -17,10 +17,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public class BaseEntity implements Serializable  {
+public class BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
-    protected int id;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", nullable = false, updatable = false)
+	protected Integer id;
+
+	@Column(columnDefinition = "tinyint(1) default 0", name = "is_deleted")
+	protected boolean isDeleted;
 }

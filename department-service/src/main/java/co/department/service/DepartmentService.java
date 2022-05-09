@@ -8,4 +8,6 @@ public interface DepartmentService {
 
     DepartmentModel findDepartmentById(int id);
 
+	DepartmentModel deleteSoftDepartmentById(int id);
+
 }

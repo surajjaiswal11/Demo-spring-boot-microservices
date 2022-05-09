@@ -14,4 +14,6 @@ import lombok.NoArgsConstructor;
 public class BaseModel {
 
     protected int id;
+    
+    private boolean isDeleted;
 }
