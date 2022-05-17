@@ -36,6 +36,6 @@ Our sample microservices-based system consists of the following modules:
 
 **department-service** - a module containing the second of our sample microservices that allows to perform CRUD operation
 
-**common-data** -  a module contaning common entity, repo and constants files.
+**common-data** -  a module contaning common entity, repo and constants files all our microserivces.
 
 Navigate to http://localhost:8080/swagger-ui.html (department-service) and  http://localhost:8080/swagger-ui.html (user-service) in your browser to check everything is working correctly and needed request body. You can change the default port in the application.properties file
